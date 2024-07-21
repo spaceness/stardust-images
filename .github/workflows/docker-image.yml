@@ -21,5 +21,5 @@ jobs:
        password: ${{ secrets.GITHUB_TOKEN }}
     - uses: actions/checkout@v4
     - name: Build the Docker image
-      run: bash build.sh
+      run: bash build.sh -p
     
