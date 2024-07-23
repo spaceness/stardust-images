@@ -4,7 +4,7 @@ ENV USER=stardust
 ENV PNPM_HOME="/home/stardust/.local/share/pnpm"
 WORKDIR /app
 
-RUN apt-get update && apt-get install --no-install-recommends -y \
+RUN apt-get update && apt-get install  -y \
     xfonts-75dpi xvfb passwd sudo dbus dbus-x11 libxrandr2 libxext-dev libxrender-dev libxtst-dev \
     python3 python3-pip xterm procps python3-numpy wget curl inetutils-ping imagemagick nano \
     kde-plasma-desktop breeze firefox-esr kwin-x11 plasma-discover tigervnc-tools tigervnc-standalone-server \
