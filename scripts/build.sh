@@ -39,22 +39,9 @@ else
 fi
 
 
-push_flag=false
-for arg in "$@"; do
-  if [ "$arg" == "-p" ]; then
-    push_flag=true
-    break
-  fi
-done
 
 
 for t in ${images[@]}; do
     printf "$BANNER$BGREEN Building$OFF $BLUE$t$OFF\n"
 	docker build -t ghcr.io/spaceness/$t -f $t/Dockerfile .;
-	if $push_flag; then
- 	printf "$BANNER$BBLUE Pushing$OFF Docker container$BLUE ghcr.io/spaceness/$t$OFF\n"
-	docker push ghcr.io/spaceness/$t
-else
-	printf "\n$BANNER$BRED Skipping$OFF push for$BLUE ghcr.io/spaceness/$t$OFF\n\n"
-fi
 done

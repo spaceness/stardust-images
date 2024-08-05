@@ -7,7 +7,7 @@ WORKDIR /app
 RUN apt-get update && apt-get install --no-install-recommends -y \
     xfonts-75dpi xvfb passwd sudo dbus dbus-x11 libxrandr2 libxext-dev libxrender-dev libxtst-dev \
     python3 python3-pip xterm procps python3-numpy unzip xfwm4 xfce4-terminal xfce4-session xfconf xfce4-notifyd \
-    wget curl inetutils-ping imagemagick nano libsdl2-mixer-2.0-0 libsdl2-2.0-0 fluidsynth tigervnc-tools \
+    wget curl inetutils-ping imagemagickvimlibsdl2-mixer-2.0-0 libsdl2-2.0-0 fluidsynth tigervnc-tools \
     tigervnc-standalone-server tigervnc-common && \
     curl -fsSL https://deb.nodesource.com/setup_20.x | bash - && \
     apt-get install -y nodejs && \
@@ -25,11 +25,10 @@ USER stardust
 RUN touch /home/stardust/.Xresources /home/stardust/.Xauthority
 
 COPY ./server ./server
-COPY ./start.sh ./start.sh
-COPY ./pinball/xstartup ./xstartup
+COPY ./scripts/start.sh ./start.sh
+COPY ./pinball/xstartup /home/stardust/.vnc/xstartup
 
-RUN cp ./xstartup /home/stardust/.vnc/xstartup && \
-    chmod +x /home/stardust/.vnc/xstartup && \
+RUN sudo chmod +x /home/stardust/.vnc/xstartup && \
     cd server && sudo npm i -g pnpm tsx && sudo pnpm i && sudo pnpm build
 
 USER root
