@@ -1,15 +1,16 @@
 FROM debian:latest
-LABEL org.opencontainers.image.source https://github.com/spaceness/stardust-images
+LABEL org.opencontainers.image.source=https://github.com/spaceness/stardust-images
 ENV USER=stardust
 ENV PNPM_HOME="/home/stardust/.local/share/pnpm"
+ENV START="startxfce4"
 WORKDIR /app
 RUN apt-get update && apt-get install --no-install-recommends -y xfonts-75dpi xvfb passwd sudo dbus dbus-x11 \
     libxrandr2 libxext-dev libxrender-dev libxtst-dev python3 python3-pip xterm git procps python3-numpy neofetch \
     xfce4 wget curl xfce4-goodies inetutils-ping firefox-esr chromium gimp imagemagick remmina remmina-plugin-vnc remmina-plugin-rdp flatpak vim
 RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - &&\
     apt-get install -y nodejs
-RUN apt-get install --no-install-recommends -y \
-    tigervnc-tools tigervnc-standalone-server tigervnc-common
+COPY ./scripts/xpra.sh ./xpra-install.sh
+RUN bash xpra-install.sh
 RUN mkdir -p /run/dbus
 RUN useradd --uid 1000 stardust
 RUN mkdir -p /home/stardust

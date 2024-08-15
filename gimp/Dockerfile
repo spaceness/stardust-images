@@ -2,16 +2,17 @@ FROM debian:latest
 LABEL org.opencontainers.image.source=https://github.com/spaceness/stardust-images
 ENV USER=stardust
 ENV PNPM_HOME="/home/stardust/.local/share/pnpm"
+ENV START="gimp"
 WORKDIR /app
 
 RUN apt-get update && apt-get install --no-install-recommends -y \
-    xfonts-75dpi xvfb passwd sudo dbus dbus-x11 libxrandr2 libxext-dev libxrender-dev libxtst-dev \
+    xfonts-75dpi passwd sudo dbus dbus-x11 libxrandr2 libxext-dev libxrender-dev libxtst-dev \
     python3 python3-pip xterm procps python3-numpy xfwm4 xfce4-terminal xfce4-session xfconf xfce4-notifyd \
-    wget curl inetutils-ping imagemagick vim tigervnc-tools tigervnc-standalone-server tigervnc-common gimp && \
+    wget curl inetutils-ping imagemagick vim gimp && \
     curl -fsSL https://deb.nodesource.com/setup_20.x | bash - && \
-    apt-get install -y nodejs && \
-    apt-get clean && rm -rf /var/lib/apt/lists/*
-
+    apt-get install -y nodejs
+COPY ./scripts/xpra.sh ./xpra-install.sh
+RUN bash xpra-install.sh
 RUN useradd --uid 1000 stardust && \
     mkdir -p /run/dbus /home/stardust /home/stardust/.vnc && \
     chown -R stardust:stardust /home/stardust && \
