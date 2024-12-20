@@ -33,7 +33,7 @@ window.addEventListener("load", () => {
 		.then((res) => res.json())
 		.then((/** @type {String[]} */ data) => {
 			if (data.length === 0) {
-				document.getElementById("fileslist").innerHTML =`
+				document.getElementById("fileslist").innerHTML = `
                 <div class="relative w-full rounded-lg border p-4 [&>svg~*]:pl-7 [&>svg+div]:translate-y-[-3px] [&>svg]:absolute [&>svg]:left-4 [&>svg]:top-4 [&>svg]:text-foreground">
                   <i data-lucide="info" class="size-4"></i>
                 <p class="mb-1 font-medium leading-none tracking-tight">There are no files in the container.</p>
