@@ -1,6 +1,9 @@
+> [!CAUTION]
+> These images are only for Stardust v0.9 and below. For versions 1.0 and later they are located in the [/workspaces](https://github.com/spaceness/stardust/tree/rewrite/workspaces) folder. 
+
 # Stardust Images
 
-Docker workspaces with Guac preinstalled, created specifically for Stardust. However, these images can also be used independently.
+Docker workspaces with TigerVNC preinstalled, created specifically for Stardust. However, these images can also be used independently.
 
 Additionally, a Fastify server is included for file upload and download functionality.
 
